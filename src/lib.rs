@@ -44,7 +44,10 @@ cfg_if::cfg_if! {
     if #[cfg(target_os = "redox")] {
         #[path = "redox.rs"]
         mod imp;
-    } else if #[cfg(windows)] {
+    } else if #[cfg(target_os = "hermit")] {
+        #[path = "hermit.rs"]
+        mod imp;
+    }else if #[cfg(windows)] {
         #[path = "windows.rs"]
         mod imp;
     } else if #[cfg(all(target_family = "wasm", not(target_os = "emscripten")))] {
